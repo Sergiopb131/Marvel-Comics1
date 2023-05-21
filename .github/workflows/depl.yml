@@ -13,6 +13,7 @@ jobs:
       - run: npm install
       - run: npm install bootstrap
       - run: npm install axios
+      - run: npm install md5
       - run: CI='' npm run build
       - uses: jakejarvis/s3-sync-action@master
         with:

@@ -3,8 +3,7 @@ import axios from 'axios';
 import md5 from 'md5';
 
 function Comics() {
-
-  const [comics, setComics] = useState([])
+  const [comics, setComics] = useState([]);
 
   useEffect(() => {
     const fetchComics = async () => {
@@ -27,22 +26,55 @@ function Comics() {
   }, []);
 
   return (
-    <div className="Comics" style={{ background: 'lightblue', padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Lista de Cómics de Marvel</h1>
-      <div className="comic-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', justifyContent: 'center' }}>
+    <div className="Comics" style={comicsContainerStyle}>
+      <h1 style={headerStyle}>Lista de Comics de Marvel</h1>
+      <div className="comics-grid" style={comicsGridStyle}>
         {comics.map((comic) => (
-          <div className="comic-card" key={comic.id} style={{ textAlign: 'center' }}>
-            <img
-              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-              alt={comic.title}
-              style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'cover' }}
-            />
-            <p style={{ fontWeight: 'bold' }}>{comic.title}</p>
+          <div className="comic-card" key={comic.id} style={comicCardStyle}>
+            <img src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} style={comicImageStyle} />
+            <p style={comicTitleStyle}>{comic.title}</p>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
+const comicsContainerStyle = {
+    background: 'linear-gradient(135deg, #003366, #66ccff)',
+    backgroundSize: 'cover',
+    padding: '20px',
+  };
+
+const headerStyle = {
+  textAlign: 'center',
+  color: 'white',
+  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.6)',
+};
+
+const comicsGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+  gap: '20px',
+  justifyContent: 'center',
+};
+
+const comicCardStyle = {
+  textAlign: 'center',
+  background: 'white',
+  padding: '10px',
+  borderRadius: '5px',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+};
+
+const comicImageStyle = {
+  maxWidth: '100%',
+  maxHeight: '200px',
+  objectFit: 'cover',
+};
+
+const comicTitleStyle = {
+  fontWeight: 'bold',
+};
 
 export default Comics;
